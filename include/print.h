@@ -1,3 +1,3 @@
 #include<string>
 
-void my_print(std::string str);
+void my_print(std::string str); // test
