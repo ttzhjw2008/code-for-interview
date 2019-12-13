@@ -36,4 +36,5 @@ endif()
 #file(${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 add_executable(${PROJECT_NAME}  ${PROJECT_SOURCE_DIR}/src/main.cpp 
-                ${PROJECT_SOURCE_DIR}/src/my_print.cpp)
+                ${PROJECT_SOURCE_DIR}/src/my_print.cpp
+                ${PROJECT_SOURCE_DIR}/src/test.cpp)
