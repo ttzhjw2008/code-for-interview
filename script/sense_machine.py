@@ -18,9 +18,14 @@ def sense_and (x1, x2):
     else:
         return 0
 
+def sigmoid (x):
+    return 1/1+np.exp(-x)
+
 
 if __name__ == "__main__":
     input1 = 1
     input2 = 1
     result = sense_and(input1, input2)
     print("the result is: %s" % result) 
+
+    
