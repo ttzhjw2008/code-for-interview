@@ -3,6 +3,15 @@
 #include<string>
 #include<vector>
 
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(NULL) {
+	}
+};
+
+bool set_link_list(ListNode* head, std::vector<int> val_list);
 bool check_inside(std::vector<std::vector<int>> a, int b);
 
 #endif
