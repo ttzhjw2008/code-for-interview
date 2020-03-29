@@ -7,3 +7,5 @@ class Solution {
 public:
     ListNode* FindKthToTail(ListNode* pListHead, unsigned int k);
 };
+
+#endif

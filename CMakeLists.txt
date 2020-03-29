@@ -38,4 +38,4 @@ endif()
 add_executable(${PROJECT_NAME}  ${PROJECT_SOURCE_DIR}/src/main.cpp 
                 ${PROJECT_SOURCE_DIR}/src/common.cpp
                 ${PROJECT_SOURCE_DIR}/src/my_print.cpp
-                ${PROJECT_SOURCE_DIR}/src/test.cpp)
+                ${PROJECT_SOURCE_DIR}/src/test_solution.cpp)

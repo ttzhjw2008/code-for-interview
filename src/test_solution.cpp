@@ -1,4 +1,5 @@
 #include "common.h"
+#include "test_solution.h"
 
 
 ListNode* Solution::FindKthToTail(ListNode* pListHead, unsigned int k) {
