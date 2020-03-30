@@ -73,3 +73,16 @@ bool Solution::Find2dArray(int target, std::vector<std::vector<int> > array) {
     }
     return false;
 }
+
+void Solution::replaceSpace(char *str,int length) {
+    std::vector<char> str_out;
+    for (int i = 0; i < length; i++) {
+        if (' ' == str[i]) {
+            str_out.push_back('%');
+            str_out.push_back('2');
+            str_out.push_back('0');
+        } else {
+            str_out.push_back(str[i]);
+        }
+    }
+}

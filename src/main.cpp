@@ -29,6 +29,10 @@ TEST(testSwardToOffer,find_2d_array){
     EXPECT_EQ(false, solver.Find2dArray(18, input_matrix));
 }
 
+TEST(testSwardToOffer,replace_space){
+    ;
+}
+
 int main(int argc,char **argv) {
 
     testing::InitGoogleTest(&argc,argv);
