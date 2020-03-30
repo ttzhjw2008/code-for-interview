@@ -22,8 +22,11 @@ TEST(testSwardToOffer,print_matrix){
 }
 
 TEST(testSwardToOffer,find_2d_array){
-    
-    EXPECT_EQ(out_put, out_test);
+    std::vector<std::vector<int>> input_matrix = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+    int targe = 5;
+    Solution solver;
+    EXPECT_EQ(true, solver.Find2dArray(targe, input_matrix));
+    EXPECT_EQ(false, solver.Find2dArray(18, input_matrix));
 }
 
 int main(int argc,char **argv) {

@@ -52,6 +52,24 @@ std::vector<int> Solution::printMatrix(std::vector<std::vector<int>>& matrix) {
     return output_vec; 
 }
 
-bool Solution::Find2dArray(int target, vector<vector<int> > array) {
-    
+bool Solution::Find2dArray(int target, std::vector<std::vector<int> > array) {
+    int array_row = array.size();
+    if (array_row < 1) {
+        return false;
+    }
+    int array_line = array[0].size();
+    if (array_line < 1) {
+        return false;
+    }
+
+    for (int counter_row=0; counter_row< array_row; counter_row++) {
+        for (int counter_line=0; counter_line<array_line; counter_line++) {
+            if (target == array[counter_row][counter_line]) {
+                return true;
+            } else if (target > array[counter_row][counter_line]) {
+                continue;
+            }
+        }
+    }
+    return false;
 }
