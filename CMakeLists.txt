@@ -22,8 +22,6 @@ include_directories(
 
 #message(STATUS "PROJECT_INCLUDE_DIR is: ${PROJECT_INCLUDE_DIR}, ${CMAKE_CURRENT_SOURCE_DIR}, ${PROJECT_SOURCE_DIR}")
 
-#add_library(control_library SHARED VPS.cpp)
-
 #add_dependencies(${PROJECT_NAME}
 #    all_proto_library
 #)
@@ -39,3 +37,5 @@ add_executable(${PROJECT_NAME}  ${PROJECT_SOURCE_DIR}/src/main.cpp
                 ${PROJECT_SOURCE_DIR}/src/common.cpp
                 ${PROJECT_SOURCE_DIR}/src/my_print.cpp
                 ${PROJECT_SOURCE_DIR}/src/test_solution.cpp)
+
+target_link_libraries(${PROJECT_NAME} gtest pthread)

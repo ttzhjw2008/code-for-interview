@@ -21,3 +21,8 @@ bool set_link_list(ListNode* head, std::vector<int> val_list) {
     std::cout << "try to return" << std::endl;
     return true;
 }
+
+bool check_inside() {
+    // std::cout << "test run"<< std::endl;
+    return false;
+}
