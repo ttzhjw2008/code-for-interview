@@ -1,5 +1,6 @@
 #include "common.h"
 #include "test_solution.h"
+#include<iostream>
 
 
 ListNode* Solution::FindKthToTail(ListNode* pListHead, unsigned int k) {
@@ -85,4 +86,16 @@ void Solution::replaceSpace(char *str,int length) {
             str_out.push_back(str[i]);
         }
     }
+}
+
+std::vector<int> Solution::printListFromTailToHead(ListNode* head) {
+    std::vector<int> list_vector;
+    ListNode* temp_node = new ListNode(0);
+    temp_node->next = head->next;
+    while (temp_node->next != NULL)
+    {
+        temp_node = temp_node->next;
+        list_vector.push_back(temp_node->val);
+    }
+    return list_vector;
 }

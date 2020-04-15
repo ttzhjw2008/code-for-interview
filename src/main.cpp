@@ -33,6 +33,17 @@ TEST(testSwardToOffer,replace_space){
     ;
 }
 
+TEST(testSwardToOffer,printListFromTailToHead){
+    std::vector<int> test_vector= {1, 2, 3, 4, 5, 6};
+    ListNode *test_list = new ListNode(0);
+    bool set_list_result = set_link_list(test_list, test_vector);
+    // std::cout << "111" << std::endl;
+    Solution solver;
+    EXPECT_TRUE(set_list_result);
+    // std::cout << test_vector.size() << std::endl;
+    EXPECT_EQ(test_vector, solver.printListFromTailToHead(test_list));
+}
+
 int main(int argc,char **argv) {
 
     testing::InitGoogleTest(&argc,argv);

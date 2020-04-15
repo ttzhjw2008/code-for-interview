@@ -9,6 +9,7 @@ public:
     std::vector<int> printMatrix(std::vector<std::vector<int>>& matrix);
     bool Find2dArray(int target, std::vector<std::vector<int> > array);
     void replaceSpace(char *str,int length);
+    std::vector<int> printListFromTailToHead(ListNode* head);
 };
 
 #endif
