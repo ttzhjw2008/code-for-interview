@@ -89,13 +89,66 @@ void Solution::replaceSpace(char *str,int length) {
 }
 
 std::vector<int> Solution::printListFromTailToHead(ListNode* head) {
-    std::vector<int> list_vector;
-    ListNode* temp_node = new ListNode(0);
-    temp_node->next = head->next;
-    while (temp_node->next != NULL)
+    std::vector<int> list_vector_temp, list_vector_out;
+
+    while (head->next != NULL)
     {
-        temp_node = temp_node->next;
-        list_vector.push_back(temp_node->val);
+        head = head->next;
+        list_vector_temp.emplace_back(head->val);
     }
-    return list_vector;
+    size_t i = list_vector_temp.size();
+    while(i > 0) {
+        list_vector_out.emplace_back(list_vector_temp[i-1]);
+        i--;
+    }
+    return list_vector_out;
+}
+
+TreeNode* Solution::reConstructBinaryTree(std::vector<int>& pre, std::vector<int>& vin) {
+    if (pre.size() <= 1) {
+        TreeNode* tree_node_leaf = new TreeNode(pre[0]);
+        return tree_node_leaf;
+    }
+
+    TreeNode* tree_node_new = new TreeNode(pre[0]);
+    int64_t index = 0;
+    for (size_t i=0; i<vin.size(); i++) {
+        if (pre[0] == vin[i]) {
+            index = i;
+            break;
+        }
+    }
+    if (index>0) {
+        std::vector<int> pre_left(pre.begin()+1, pre.begin()+index+1);
+        std::vector<int> vin_left(vin.begin(), vin.begin()+index);
+        tree_node_new->left = reConstructBinaryTree(pre_left,vin_left);
+    }
+    if (vin.size()-index-1 > 0) {
+        std::vector<int> pre_right(pre.begin()+index+1,pre.end());
+        std::vector<int> vin_right(vin.begin()+index+1, vin.end());
+        tree_node_new->right = reConstructBinaryTree(pre_right,vin_right);
+    }
+
+    return tree_node_new;   
+}
+
+void Solution::push(int node) {
+    while (!stack2.empty())
+    {
+        stack1.push(stack2.top());
+        stack2.pop();
+    }
+    stack1.push(node);
+}
+
+int Solution::pop() {
+    while (!stack1.empty())
+    {
+        stack2.push(stack1.top());
+        stack1.pop();
+    }
+    int return_result =  stack2.top();
+    stack2.pop();
+
+    return return_result;
 }

@@ -2,6 +2,7 @@
 #define IV_INCLUDE_TEST_SOLUTION_H
 #include<string>
 #include<vector>
+#include<stack>
 
 class Solution {
 public:
@@ -10,6 +11,14 @@ public:
     bool Find2dArray(int target, std::vector<std::vector<int> > array);
     void replaceSpace(char *str,int length);
     std::vector<int> printListFromTailToHead(ListNode* head);
+    TreeNode* reConstructBinaryTree(std::vector<int>& pre, std::vector<int>& vin);
+
+    void push(int node);
+    int pop();
+    
+private:
+    std::stack<int> stack1;
+    std::stack<int> stack2;
 };
 
 #endif

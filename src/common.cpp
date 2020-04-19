@@ -1,6 +1,11 @@
 #include"common.h"
 #include<iostream>
 
+
+bool TreeNode::pre_order_travel(std::vector<int>& out_vec, TreeNode* top_node) {
+    ;
+}
+
 bool set_link_list(ListNode* head, std::vector<int> val_list) {
     if (val_list.size() == 0) {
         return false;
