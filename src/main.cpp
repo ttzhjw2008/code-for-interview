@@ -3,6 +3,7 @@
 #include "test_solution.h"
 
 #include <gtest/gtest.h>
+#
 
 #include<iostream>
 #include<vector>
@@ -70,7 +71,7 @@ TEST(testSwardToOffer,reConstructBinaryTree){
     EXPECT_EQ(1,return_node->val);
 }
 
-TEST(testSwardToOffer,stack_push_pop){
+TEST(testSwardToOffer,stack_list_push_pop){
 
     std::vector<int> test_vec = {1,2,4,5,3};
 
@@ -80,9 +81,42 @@ TEST(testSwardToOffer,stack_push_pop){
 
     int result_1 = solver.pop();
 
-
     EXPECT_EQ(5,result_1);
 }
+
+TEST(testSwardToOffer,minNumberInRotateArray) {
+    std::vector<int> test_vec = {3,4,5,1,2};
+    
+    Solution Solver;
+    int result_1 = Solver.minNumberInRotateArray(test_vec);
+    EXPECT_EQ(1,result_1);
+}
+
+TEST(testSwardToOffer,Fibonacci) {
+    int n = 39;
+    
+    Solution Solver;
+    Solver.Fibonacci(n);
+    // std::cout << "Fibonacci(" << n << ") is:" << result_1 << std::endl;
+}
+
+TEST(testSwardToOffer,jumpFloor) {
+    int n = 39;
+    
+    Solution Solver;
+    int result_1 = Solver.jumpFloor(n);
+    std::cout << "jumpFloor(" << n << ") is:" << result_1 << std::endl;
+}
+
+TEST(testSwardToOffer,jumpFloorII) {
+    int n = 29;
+    
+    Solution Solver;
+    int result_1 = Solver.jumpFloorII(n);
+    std::cout << "jumpFloor(" << n << ") is:" << result_1 << std::endl;
+}
+
+
 
 int main(int argc,char **argv) {
 
@@ -92,3 +126,4 @@ int main(int argc,char **argv) {
     return run_result;
 
 }
+

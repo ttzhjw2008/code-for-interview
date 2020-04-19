@@ -12,6 +12,10 @@ public:
     void replaceSpace(char *str,int length);
     std::vector<int> printListFromTailToHead(ListNode* head);
     TreeNode* reConstructBinaryTree(std::vector<int>& pre, std::vector<int>& vin);
+    int minNumberInRotateArray(std::vector<int>& rotateArray);
+    int Fibonacci(int n);
+    int jumpFloor(int number);
+    int jumpFloorII(int number);
 
     void push(int node);
     int pop();

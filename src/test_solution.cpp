@@ -152,3 +152,68 @@ int Solution::pop() {
 
     return return_result;
 }
+
+int Solution::minNumberInRotateArray(std::vector<int>& rotateArray) {
+    int min_index = 0;
+    for (size_t i=0; i<rotateArray.size(); i++) {
+        if (rotateArray[i] < rotateArray[min_index]) {
+            min_index = i;
+            break;
+        }
+    }
+    return rotateArray[min_index];
+}
+
+int Solution::Fibonacci(int n) {
+    if (n<0||n>39) {
+        return 0;
+    }
+    if (n<2) {
+        return n;
+    }
+
+    int sn1 = 1;
+    int sn2 = 0;
+    int s = 1;
+    for (int i=2; i<=n; i++) {
+        s = sn2 + sn1;
+        sn2 = sn1;
+        sn1 = s;
+    }
+    
+    return s;
+    // return (Fibonacci(n-1) + Fibonacci(n-2));
+}
+
+int Solution::jumpFloor(int number) { 
+    if (number < 0) {
+        return 0;
+    }
+
+    if (number<=2) {
+        return number;
+    }
+
+    int solver_number = 0;
+    solver_number = jumpFloor(number-1) + jumpFloor(number-2);
+    return solver_number;
+}
+
+int Solution::jumpFloorII(int number) {
+    if (number < 0) {
+        return 0;
+    }
+    if (number<=2) {
+        return number;
+    }
+    std::vector<int> jump_result = {0,1,2};
+    for (int i=3;i<=number; i++) {
+        int s_jump = 0;
+        for (size_t j=0; j<jump_result.size(); j++) {
+            s_jump = s_jump + jump_result[j];
+        }
+        jump_result.emplace_back(s_jump+1);
+    }
+    return jump_result[number];
+}
+
