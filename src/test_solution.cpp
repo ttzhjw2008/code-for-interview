@@ -330,15 +330,29 @@ ListNode* Solution::ReverseList(ListNode* pHead) {
 }
 
 ListNode* Solution::Merge(ListNode* pHead1, ListNode* pHead2) {
-    ListNode* merged_node = new ListNode(0);
-    while (pHead1 != NULL) {
-        while (pHead2 != NULL) {
-            if(pHead2->val >= pHead1->val) {
-                merged_node->next = pHead2;
+        ListNode* pre_node = new ListNode(0);
+        ListNode* cur_node = pre_node;
+        
+        while (pHead1 != NULL && pHead2 != NULL) {
+            if (pHead2->val < pHead1->val) {
+                cur_node->next = pHead2;
+                pHead2 = pHead2->next;
+            } else {
+                cur_node->next = pHead1;
+                pHead1 = pHead1->next;
             }
+            cur_node = cur_node->next;
+        }
+        while (pHead1 != NULL) {
+            cur_node->next = pHead1;
+            pHead1 = pHead1->next;
+            cur_node = cur_node->next;
+        }
+        while (pHead2 != NULL) {
+            cur_node->next = pHead2;
+            pHead2 = pHead2->next;
+            cur_node = cur_node->next;
         }
         
-    }
-    
-
+        return pre_node->next;
 }
