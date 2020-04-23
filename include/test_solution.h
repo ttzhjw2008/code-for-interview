@@ -16,6 +16,12 @@ public:
     int Fibonacci(int n);
     int jumpFloor(int number);
     int jumpFloorII(int number);
+    int rectCover(int number);
+    int NumberOf1(int n);
+    double Power(double base, int exponent);
+    void reOrderArray(std::vector<int> &array);
+    ListNode* ReverseList(ListNode* pHead);
+    ListNode* Merge(ListNode* pHead1, ListNode* pHead2);
 
     void push(int node);
     int pop();
