@@ -116,6 +116,16 @@ TEST(testSwardToOffer,jumpFloorII) {
     std::cout << "jumpFloor(" << n << ") is:" << result_1 << std::endl;
 }
 
+TEST(testSwardToOffer,maxScore2) {
+    std::vector<int> a = {63,82,24,65,51,25,40,25,6,45,83,98,24,91,85,33,38,40,42,32,28,41,55,33};
+    std::vector<int> b = {1, 2, 3, 4, 5 , 6, 1};
+    
+    Solution Solver;
+    int result_1 = Solver.maxScore2(a, 23);
+    int result_2 = Solver.maxScore2(b, 3);
+    EXPECT_EQ(1143,result_1);
+    EXPECT_EQ(12,result_2);
+}
 
 
 int main(int argc,char **argv) {

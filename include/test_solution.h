@@ -17,6 +17,13 @@ public:
     int jumpFloor(int number);
     int jumpFloorII(int number);
 
+
+    int maxScore1(std::string s);
+    int maxScore2(std::vector<int>& cardPoints, int k);
+
+
+    ListNode* Merge(ListNode* pHead1, ListNode* pHead2);
+
     void push(int node);
     int pop();
     
