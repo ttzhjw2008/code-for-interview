@@ -356,3 +356,32 @@ ListNode* Solution::Merge(ListNode* pHead1, ListNode* pHead2) {
         
         return pre_node->next;
 }
+
+bool Solution::HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2) {
+    if (pRoot1 == NULL || pRoot2 == NULL) {
+        return false;
+    }
+    if (pRoot2->left == NULL &&  pRoot2->right == NULL && pRoot1->val == pRoot2->val) {
+        return true;
+    }
+    if (pRoot2->left == NULL && pRoot2->val == pRoot1->val) {
+        if (HasSubtree(pRoot1->right, pRoot2->right)) {
+            return true;
+        }
+    }
+    if (pRoot2->right == NULL && pRoot2->val == pRoot2->val) {
+        if (HasSubtree(pRoot1->left, pRoot2->left)) {
+            return true;
+        }
+    }
+    if (pRoot1->val == pRoot2->val) {
+        if(HasSubtree(pRoot1->left, pRoot2->left) && HasSubtree(pRoot1->right, pRoot2->right)) {
+            return true;
+        }
+    }
+    if (HasSubtree(pRoot1->left, pRoot2) || HasSubtree(pRoot1->right, pRoot2)) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -22,6 +22,8 @@ public:
     void reOrderArray(std::vector<int> &array);
     ListNode* ReverseList(ListNode* pHead);
     ListNode* Merge(ListNode* pHead1, ListNode* pHead2);
+    bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2);
+
 
     void push(int node);
     int pop();
