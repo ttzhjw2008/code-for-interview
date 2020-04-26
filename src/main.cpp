@@ -171,6 +171,10 @@ TEST(testSwardToOffer,Merge) {
 
 }
 
+TEST(testSwardToOffer,Mirror) {
+
+}
+
 int main(int argc,char **argv) {
 
     testing::InitGoogleTest(&argc,argv);
