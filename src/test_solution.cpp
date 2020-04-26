@@ -200,7 +200,7 @@ int Solution::jumpFloor(int number) {
 }
 
 int Solution::jumpFloorII(int number) {
-    if (number < 0) {
+    if (number <= 0) {
         return 0;
     }
     if (number<=2) {
@@ -219,7 +219,7 @@ int Solution::jumpFloorII(int number) {
 
 
 
-    int Solution::maxScore1(std::string s) {
+int Solution::maxScore1(std::string s) {
     int max_sum = 0;
     for (size_t i = 0; i < s.length()-1; i++) {
         int counter_left = 0;
@@ -303,4 +303,144 @@ int Solution::maxScore2(std::vector<int>& cardPoints, int k) {
     }
 
     return sum_max;
+}
+
+int Solution::rectCover(int number) {
+    if (number<=0) {
+        return 0;
+    }
+    if (number<=2) {
+        return number;
+    }
+
+    std::vector<int> cover_vec = {0,1,2};
+    int sum_cover_path = 0;
+    for (int i=3; i<=number; i++) {
+        sum_cover_path = cover_vec[i-1] + cover_vec[i-2];
+        cover_vec.emplace_back(sum_cover_path);
+    }
+    return cover_vec[number];
+}
+
+int  Solution::NumberOf1(int n) {
+    std::vector<int> binary_vec;
+    int temp = n;
+    if (n<0) {
+        temp = -n;
+    }
+    while(temp/2>=0) {
+        binary_vec.emplace_back(temp%2);
+        if (temp<=1) {
+            break;
+        }
+        temp /= 2;
+    }
+    if(n<0) {
+        for (size_t i = binary_vec.size(); i< (sizeof(int)*8-1); i++) {
+            binary_vec.emplace_back(0);
+        }
+        for (size_t i = 0; i < binary_vec.size(); i++) {
+            binary_vec[i] = (binary_vec[i] == 0) ? 1 : 0;
+        }
+        bool up_flag = 1;
+        for (size_t i = 0; i < binary_vec.size(); i++) {
+            if (binary_vec[i] == 1 && up_flag) {
+                binary_vec[i] = 0;
+            } else if (binary_vec[i] == 0 && up_flag) {
+                binary_vec[i] = 1;
+                up_flag = 0;
+            } else {
+                break;
+            }
+        }
+        binary_vec.emplace_back(1);
+    }
+    int counter_1 = 0;
+    for (size_t i = 0; i < binary_vec.size(); i++) {
+        counter_1 += binary_vec[i];
+    }
+    return counter_1;
+}
+
+double Solution::Power(double base, int exponent) {
+        if (base == 0 && exponent ==0) {
+            return 1;
+        }
+
+        double power_result = 1;
+        int temp_exp = (exponent>=0) ? exponent:-exponent;
+        for (int i=1; i<=temp_exp; i++) {
+            power_result *= base;
+        }
+        if (exponent<0) {
+            power_result = 1/power_result;
+        }
+        return power_result;
+}
+
+void Solution::reOrderArray(std::vector<int> &array) {
+    std::vector<int> array_1;
+    std::vector<int> array_2;
+
+    for (size_t i=0; i<array.size(); i++) {
+        if(array[i]%2 >0) {
+            array_1.emplace_back(array[i]);
+        } else {
+            array_2.emplace_back(array[i]);
+        }
+    }
+    size_t arr1_size = array_1.size();
+    for (size_t i=0; i<array_1.size(); i++) {
+        array[i] = array_1[i];
+    }
+    for (size_t i=0; i<array_2.size(); i++) {
+        array[i+arr1_size] = array_2[i];
+    }
+}
+
+ListNode* Solution::ReverseList(ListNode* pHead) {
+    ListNode* pre_node = nullptr;
+    ListNode* next_node = nullptr;
+    if ( pHead != NULL) {
+        pre_node = pHead;
+        pHead = pHead->next;
+        pre_node->next = NULL;
+    }
+    while (pHead != NULL)
+    {
+        next_node = pHead->next;
+        pHead->next = pre_node;
+        pre_node = pHead;
+        pHead = next_node;
+    }
+    
+    return pre_node;
+}
+
+ListNode* Solution::Merge(ListNode* pHead1, ListNode* pHead2) {
+    ListNode* pre_node = new ListNode(0);
+    ListNode* cur_node = pre_node;
+    
+    while (pHead1 != NULL && pHead2 != NULL) {
+        if (pHead2->val < pHead1->val) {
+            cur_node->next = pHead2;
+            pHead2 = pHead2->next;
+        } else {
+            cur_node->next = pHead1;
+            pHead1 = pHead1->next;
+        }
+        cur_node = cur_node->next;
+    }
+    while (pHead1 != NULL) {
+        cur_node->next = pHead1;
+        pHead1 = pHead1->next;
+        cur_node = cur_node->next;
+    }
+    while (pHead2 != NULL) {
+        cur_node->next = pHead2;
+        pHead2 = pHead2->next;
+        cur_node = cur_node->next;
+    }
+    
+    return pre_node->next;
 }

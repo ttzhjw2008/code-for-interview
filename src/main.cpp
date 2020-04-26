@@ -126,7 +126,50 @@ TEST(testSwardToOffer,maxScore2) {
     EXPECT_EQ(1143,result_1);
     EXPECT_EQ(12,result_2);
 }
+TEST(testSwardToOffer,rectCover) {
+    int n = 29;
+    
+    Solution Solver;
+    int result_1 = Solver.rectCover(n);
+    std::cout << "jumpFloor(" << n << ") is:" << result_1 << std::endl;
+}
 
+TEST(testSwardToOffer,NumberOf1) {
+    int n = 5;
+    
+    Solution Solver;
+    int result_1 = Solver.NumberOf1(n);
+    EXPECT_EQ(2,result_1);
+
+    int result_2 = Solver.NumberOf1(-7);
+    EXPECT_EQ(30,result_2);
+
+}
+
+TEST(testSwardToOffer,Power) {
+    double n1 = 2;
+    int n2 = -2;
+    Solution Solver;
+    double result_1 = Solver.Power(n1, n2);
+    EXPECT_EQ(0.25,result_1);
+}
+
+
+TEST(testSwardToOffer,reOrderArray) {
+    std::vector<int> test_arr = {1,2,3,4,5};
+    std::vector<int> arr_order = {1,3,5,2,4};
+    Solution Solver;
+    Solver.reOrderArray(test_arr);
+    EXPECT_EQ(test_arr,arr_order);
+}
+
+TEST(testSwardToOffer,ReverseList) {
+
+}
+
+TEST(testSwardToOffer,ReverseList) {
+
+}
 
 int main(int argc,char **argv) {
 
