@@ -217,6 +217,94 @@ int Solution::jumpFloorII(int number) {
     return jump_result[number];
 }
 
+
+
+int Solution::maxScore1(std::string s) {
+    int max_sum = 0;
+    for (size_t i = 0; i < s.length()-1; i++) {
+        int counter_left = 0;
+        int counter_right = 0;
+        for (size_t j = 0; j <= i; j++) {
+            counter_left += (s[j] == '0') ? 1 : 0;
+        }
+        for (size_t j = i+1; j < s.length(); j++) {
+            counter_right += (s[j] == '1') ? 1 :0; 
+        }
+        max_sum = (max_sum < (counter_left + counter_right)) ? (counter_left + counter_right) : max_sum;
+    }
+    return max_sum;
+}
+
+int Solution::maxScore2(std::vector<int>& cardPoints, int k) {
+    // if (k == 1) {
+    //     return (cardPoints[0] >= cardPoints[cardPoints.size()-1]) ? cardPoints[0] : cardPoints[cardPoints.size() -1]; 
+    // } 
+
+    // std::vector<int> vec_left;
+    // vec_left.insert(vec_left.begin(), cardPoints.begin(), cardPoints.end()-1);
+    // int counter_left = maxScore2(vec_left, k-1);
+
+    // std::vector<int> vec_right;
+    // vec_right.insert(vec_right.begin(), cardPoints.begin()+1, cardPoints.end());
+    // int counter_right = maxScore2(vec_right, k-1);
+
+    // int max_left = cardPoints[cardPoints.size()-1] + counter_left;
+    // int max_right = cardPoints[0] + counter_right;
+    // return (max_left >= max_right) ? max_left : max_right;
+
+
+    // long int sum_all = 0;
+    // for (size_t i = 0; i < cardPoints.size(); i++) {
+    //     sum_all += cardPoints[i];
+    // }
+    // long int min_counter = sum_all;
+    // for (size_t i = 0; i <= k; i++) {
+    //     long int counter_k = 0;
+    //     size_t counter_size = cardPoints.size() - k;
+    //     for (size_t j = i; j < counter_size + i; j++) {
+    //         counter_k += cardPoints[j];
+    //     }
+    //     min_counter = (min_counter < counter_k) ? min_counter : counter_k;
+    // }
+    // return sum_all - min_counter;
+
+    // long int sum_max = 0;
+    // for (size_t i = 0; i <= k; i++) {
+    //     long int counter_left = 0;
+    //     long int counter_right = 0;
+
+    //     for (size_t j = 0; j < i; j++) {
+    //         counter_left += cardPoints[j];
+    //     }
+
+    //     size_t counter_size = cardPoints.size() - k;
+    //     for (size_t j = cardPoints.size() - k + i; j < cardPoints.size(); j++) {
+    //         counter_right += cardPoints[j];
+    //     }
+    //     sum_max = (sum_max > counter_left + counter_right) ? sum_max : counter_left + counter_right;
+    // }
+    // return sum_max;
+
+    size_t card_point_size = cardPoints.size();
+    int sum_max = 0;
+    std::vector<int> sum_vec_left(k, 0);
+    std::vector<int> sum_vec_right(k, 0);
+    sum_vec_left[0] = cardPoints[0];
+    sum_vec_right[k-1] = cardPoints[card_point_size-1];
+    for (int i = 1; i < k; i++) {
+        sum_vec_left[i] = sum_vec_left[i-1] + cardPoints[i];
+        sum_vec_right[k-1-i] = sum_vec_right[k-i] + cardPoints[card_point_size-1-i];
+    }
+    
+    sum_max = sum_vec_left[k-1] > sum_vec_right[0] ? sum_vec_left[k-1] : sum_vec_right[0]; 
+    for (int i = 0; i < k-1 ; i++) {
+        int each_sum = sum_vec_left[i] + sum_vec_right[i+1];
+        sum_max = (sum_max > each_sum) ? sum_max : each_sum;
+    }
+
+    return sum_max;
+}
+
 int Solution::rectCover(int number) {
     if (number<=0) {
         return 0;
@@ -330,31 +418,31 @@ ListNode* Solution::ReverseList(ListNode* pHead) {
 }
 
 ListNode* Solution::Merge(ListNode* pHead1, ListNode* pHead2) {
-        ListNode* pre_node = new ListNode(0);
-        ListNode* cur_node = pre_node;
-        
-        while (pHead1 != NULL && pHead2 != NULL) {
-            if (pHead2->val < pHead1->val) {
-                cur_node->next = pHead2;
-                pHead2 = pHead2->next;
-            } else {
-                cur_node->next = pHead1;
-                pHead1 = pHead1->next;
-            }
-            cur_node = cur_node->next;
-        }
-        while (pHead1 != NULL) {
-            cur_node->next = pHead1;
-            pHead1 = pHead1->next;
-            cur_node = cur_node->next;
-        }
-        while (pHead2 != NULL) {
+    ListNode* pre_node = new ListNode(0);
+    ListNode* cur_node = pre_node;
+    
+    while (pHead1 != NULL && pHead2 != NULL) {
+        if (pHead2->val < pHead1->val) {
             cur_node->next = pHead2;
             pHead2 = pHead2->next;
-            cur_node = cur_node->next;
-        }
-        
+        } else {
+            cur_node->next = pHead1;
+            pHead1 = pHead1->next;
+        }      
         return pre_node->next;
+    }
+    while (pHead1 != NULL) {
+        cur_node->next = pHead1;
+        pHead1 = pHead1->next;
+        cur_node = cur_node->next;
+    }
+    while (pHead2 != NULL) {
+        cur_node->next = pHead2;
+        pHead2 = pHead2->next;
+        cur_node = cur_node->next;
+    }
+    
+    return pre_node->next;
 }
 
 bool Solution::HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2) {
@@ -385,3 +473,18 @@ bool Solution::HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2) {
         return false;
     }
 }
+
+void Solution::Mirror(TreeNode *pRoot) {
+    if (pRoot == NULL) {
+        return;
+    }
+    TreeNode* temp_node = nullptr;
+    while (pRoot != NULL) {
+        temp_node = pRoot->left;
+        pRoot->left = pRoot->right;
+        pRoot->right = temp_node; 
+    }
+    Mirror(pRoot->left);
+    Mirror(pRoot->right);    
+}
+

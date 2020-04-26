@@ -25,6 +25,13 @@ public:
     bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2);
 
 
+
+    int maxScore1(std::string s);
+    int maxScore2(std::vector<int>& cardPoints, int k);
+
+
+    ListNode* Merge(ListNode* pHead1, ListNode* pHead2);
+
     void push(int node);
     int pop();
     
