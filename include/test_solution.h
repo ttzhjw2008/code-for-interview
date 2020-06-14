@@ -4,8 +4,12 @@
 #include<vector>
 #include<stack>
 
+
+
 class Solution {
+
 public:
+
     ListNode* FindKthToTail(ListNode* pListHead, unsigned int k);
     std::vector<int> printMatrix(std::vector<std::vector<int>>& matrix);
     bool Find2dArray(int target, std::vector<std::vector<int> > array);
@@ -23,14 +27,18 @@ public:
     ListNode* ReverseList(ListNode* pHead);
     ListNode* Merge(ListNode* pHead1, ListNode* pHead2);
     bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2);
-
     int maxScore1(std::string s);
     int maxScore2(std::vector<int>& cardPoints, int k);
-
     void push(int node);
     int pop();
-
     void Mirror(TreeNode *pRoot);
+    std::vector<int> PrintFromTopToBottom(TreeNode* root);
+    bool VerifySquenceOfBST(std::vector<int> sequence);
+    std::string serialize(TreeNode* root);
+    bool get_serialize_vec(TreeNode* root, std::vector<std::string>& str_vec);
+    TreeNode* deserialize(std::string data);
+    TreeNode* creat_tree(std::vector<std::string>& input_vec, int& index); 
+
     
 private:
     std::stack<int> stack1;

@@ -3,11 +3,10 @@
 #include "test_solution.h"
 
 #include <gtest/gtest.h>
-#
 
 #include<iostream>
 #include<vector>
-
+#include<string>
 
 TEST(testCase,test0){
     EXPECT_FALSE(check_inside());
@@ -174,6 +173,24 @@ TEST(testSwardToOffer,Merge) {
 TEST(testSwardToOffer,Mirror) {
 
 }
+
+TEST(testSwardToOffer,verifyPostorder) {
+    std::vector<int> test_vec = {1, 2, 3, 4, 5};
+
+    Solution solver;
+    bool verify_result = solver.VerifySquenceOfBST(test_vec);
+    EXPECT_TRUE(verify_result);
+}
+
+TEST(testSwardToOffer,serialize_deserialize) {
+    std::string test_str = "[1,2,3,null,null,4,5]";
+
+    Solution solver;
+    TreeNode* deserialize_result = solver.deserialize(test_str);
+    std::string serialize_result = solver.serialize(deserialize_result);
+    EXPECT_EQ(test_str, serialize_result);
+}
+
 
 int main(int argc,char **argv) {
 

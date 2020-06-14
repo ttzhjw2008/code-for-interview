@@ -488,3 +488,144 @@ void Solution::Mirror(TreeNode *pRoot) {
     Mirror(pRoot->right);    
 }
 
+ std::vector<int> Solution::PrintFromTopToBottom(TreeNode* root){
+    std::vector<int> ret_vec;
+     while (root == NULL) {
+        return ret_vec;
+     }
+     std::vector<TreeNode*> each_row;
+     each_row.emplace_back(root);
+     while (each_row.size() > 0) {
+        std::vector<TreeNode*> next_row;
+        for (size_t i = 0; i < each_row.size(); i++) {
+            ret_vec.emplace_back(each_row[i]->val);
+            if (each_row[i]->left != NULL) {
+                next_row.emplace_back(each_row[i]->left);
+            }
+            if (each_row[i]->right != NULL) {
+                next_row.emplace_back(each_row[i]->right);
+            }
+        }
+        each_row.swap(next_row);
+     }
+     return ret_vec;
+}
+
+bool Solution::VerifySquenceOfBST(std::vector<int> sequence) {
+    size_t seq_size = sequence.size();
+    if (seq_size < 1) {
+        return false;
+    }
+    if (seq_size == 1) {
+        return true;
+    }
+    if (seq_size == 2) {
+        return true;
+    }
+    // if (seq_size == 3) {
+    //     if (sequence[0] < sequence[2] 
+    //         && sequence[1] > sequence[2]) {
+    //             return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+    size_t left_boot_index = 0;
+    for (size_t i = 0; (i < seq_size-1) && (sequence[i] < sequence[seq_size-1]); i++) {
+        left_boot_index = i;
+    }
+    for (size_t i = left_boot_index+1; i < seq_size-1; i++) {
+        if (sequence[i] < sequence[seq_size-1]) {
+            return false;
+        }
+    }
+    std::vector<int> left_sequence;
+    std::vector<int> right_sequence;
+    left_sequence.insert(left_sequence.begin(), sequence.begin(), sequence.begin()+left_boot_index+1);
+    right_sequence.insert(right_sequence.begin(), sequence.begin()+left_boot_index+1, sequence.begin()+seq_size-1);
+
+    bool left_result = true;
+    bool right_result = true;
+    if (left_sequence.size() > 0) {
+        left_result = VerifySquenceOfBST(left_sequence);
+    }
+    if (right_sequence.size() > 0) {
+        right_result = VerifySquenceOfBST(right_sequence);
+    }
+    bool recurrence_result = left_result && right_result;
+    return recurrence_result;
+}
+
+std::string Solution::serialize(TreeNode* root) {
+    std::string str_serialeze = "";
+    std::vector<std::string> str_vec;
+
+    get_serialize_vec(root, str_vec);
+    // std::cout << "the size of str_vec is: " << str_vec.size() << std::endl;
+    size_t last_index= 0;
+    for (size_t i = 0; i < str_vec.size(); i++) {
+        if (str_vec[i] != "null" && str_vec[i] != ",") {
+            last_index = i;
+        }
+    }
+
+    str_serialeze.append("[");
+    for (size_t i = 0; i <= last_index; i++) {
+        str_serialeze.append(str_vec[i]);
+    }
+    str_serialeze.append("]");
+    return str_serialeze;
+}
+
+bool Solution::get_serialize_vec(TreeNode* root, std::vector<std::string>& str_vec) {
+    if (root == NULL) {
+        str_vec.emplace_back("null");
+        str_vec.emplace_back(",");
+        return true;
+    }
+    
+    static std::vector<int> each_row;
+    each_row.emplace_back(root->val);
+    str_vec.emplace_back(std::to_string(root->val));
+    str_vec.emplace_back(",");
+    get_serialize_vec(root->left, str_vec);
+    get_serialize_vec(root->right, str_vec);
+    return true;
+}
+
+// Decodes your encoded data to tree.
+TreeNode* Solution::deserialize(std::string data) {
+    if (data.empty()) {
+        TreeNode* test_node = NULL;
+        return test_node;
+    }
+    std::vector<std::string> str_vec;
+    for(int data_index = 1; data_index < data.size(); data_index++) {
+        for (int j = data_index; j < data.size(); j++) {
+            if (data[j] == ',' || data[j] == ']') {
+                str_vec.emplace_back(data.substr(data_index, j-data_index));
+                data_index = j;
+                break;
+            }
+        }
+    }
+    int str_index = 0;
+    TreeNode* root_node = creat_tree(str_vec, str_index);
+
+    return root_node;
+}
+
+TreeNode* Solution::creat_tree(std::vector<std::string>& input_vec, int& index) {
+    if (index >= input_vec.size()) {
+        return NULL;
+    }
+    if (input_vec[index] == "null" ) {
+        index = index +1;
+        return NULL;
+    }
+    TreeNode* current_node = new TreeNode(std::stoi(input_vec[index]));
+    index = index +1;
+    current_node->left = creat_tree(input_vec, index);
+    current_node->right = creat_tree(input_vec, index);
+    return current_node;
+}
